@@ -34,6 +34,50 @@ public class Main {
         System.out.println(handCheckee.checkThreeOfAKind(0));
         System.out.println(handCheckee.checkTwoPairOfAKind(0));
         System.out.println(handCheckee.checkOnePairOfAKind(0));
+        int five = 0;
+        int four = 0;
+        int full = 0;
+        int three = 0;
+        int twopair = 0;
+        int onepair = 0;
+        int high = 0;
+        for (int i = 0; i < fileArray.length; i++)
+        {
+            if (handCheckee.checkFiveOfAKind(i))
+            {
+                five++;
+            }
+            else if (handCheckee.checkFourOfAKind(i))
+            {
+                four++;
+            }
+            else if (handCheckee.checkFullHouseOfAKind(i))
+            {
+                full++;
+            }
+            else if (handCheckee.checkThreeOfAKind(i))
+            {
+                three++;
+            }
+            else if (handCheckee.checkTwoPairOfAKind(i))
+            {
+                twopair++;
+            }
+            else if (handCheckee.checkOnePairOfAKind(i))
+            {
+                onepair++;
+            }
+            else {
+                high++;
+            }
+        }
+        System.out.println(five);
+        System.out.println(four);
+        System.out.println(full);
+        System.out.println(three);
+        System.out.println(twopair);
+        System.out.println(onepair);
+        System.out.println(high);
 
 
 
