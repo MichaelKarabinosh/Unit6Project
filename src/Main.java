@@ -20,14 +20,12 @@ public class Main {
             fileData += s.nextLine() + "\n";
         }
         String [] fileArray = fileData.split("\n");
+        String bigList [] = new String[158];
         for (int i = 0; i < fileArray.length; i++)
         {
-            String[] splits = fileArray[i].split(",");
-            String chop = splits[splits.length - 1];
-            String getHi [] = chop.split("\\|");
-            splits[splits.length - 1] = getHi[0];
-            System.out.println(Arrays.toString(splits));
+            fileArray[i] = fileArray[i].substring(0, fileArray[i].indexOf("|"));
         }
+        System.out.println(Arrays.toString(fileArray));
 
 
 
