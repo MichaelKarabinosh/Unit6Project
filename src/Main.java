@@ -66,6 +66,7 @@ public class Main {
             else if (handCheckee.checkOnePairOfAKind(i))
             {
                 onepair++;
+                System.out.println(fileArray[i]);
             }
             else {
                 high++;

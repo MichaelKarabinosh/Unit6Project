@@ -56,6 +56,10 @@ public class HandChecker {
 
         if (whatever[0].equals(whatever[1]) && whatever[2].equals(whatever[0]))
             return true;
+        if (whatever[1].equals(whatever[2]) && whatever[1].equals(whatever[3]))
+        {
+            return true;
+        }
         return whatever[2].equals(whatever[3]) && whatever[2].equals(whatever[4]);
 
     }
