@@ -25,7 +25,16 @@ public class Main {
         {
             fileArray[i] = fileArray[i].substring(0, fileArray[i].indexOf("|"));
         }
+        HandChecker handCheckee = new HandChecker(fileArray);
+        System.out.println(handCheckee.checkFiveOfAKind(0));
         System.out.println(Arrays.toString(fileArray));
+
+        System.out.println(handCheckee.checkFourOfAKind(0));
+        System.out.println(handCheckee.checkFullHouseOfAKind(0));
+        System.out.println(handCheckee.checkThreeOfAKind(0));
+        System.out.println(handCheckee.checkTwoPairOfAKind(0));
+        System.out.println(handCheckee.checkOnePairOfAKind(0));
+
 
 
 
