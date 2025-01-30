@@ -22,10 +22,12 @@ public class Main {
             fileData += s.nextLine() + "\n";
         }
         String [] fileArray = fileData.split("\n");
-        String bigList [] = new String[158];
-        String []faceCardsFixed = new String[bigList.length];
+        String bigList[] = new String[fileArray.length];
+        Integer bidNums[] = new Integer[fileArray.length];
+        String []faceCardsNotFixed = new String[bigList.length];
         for (int i = 0; i < fileArray.length; i++)
         {
+            bidNums[i] = Integer.parseInt(fileArray[i].substring(fileArray[i].indexOf("|") + 1));
             fileArray[i] = fileArray[i].substring(0, fileArray[i].indexOf("|"));
             fileArray[i] = fileArray[i].replace("Ace", "A");
             fileArray[i] = fileArray[i].replace("King", "B");
@@ -41,9 +43,14 @@ public class Main {
             fileArray[i] = fileArray[i].replace("3", "L");
             fileArray[i] = fileArray[i].replace("2", "M");
         }
-        System.out.println(Arrays.toString(fileArray));
+        for (int i = 0; i < fileArray.length; i ++)
+        {
+          faceCardsNotFixed[i] = fileArray[i];
+        }
+        System.out.println(Arrays.toString(bidNums));
         Arrays.sort(fileArray);
         System.out.println(Arrays.toString(fileArray));
+        System.out.println(Arrays.toString(faceCardsNotFixed));
         HandChecker handCheckee = new HandChecker(fileArray);
         int five = 0;
         int four = 0;
@@ -140,6 +147,24 @@ public class Main {
                 high++;
             }
         }
+        int rank = fileArray.length;
+        int indexBid = 0;
+        int total  = 0;
+        for (int i = 0; i < fiveOfAKinds.length; i++)
+        {
+            for (int j = 0; j < faceCardsNotFixed.length; j++)
+            {
+                if (faceCardsNotFixed[j].equals(fiveOfAKinds[i]))
+                {
+                    indexBid = j;
+
+                }
+            }
+
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        System.out.println(total);
 
 
         System.out.println(Arrays.toString(fiveOfAKinds));
