@@ -3,8 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
+
 
         File f = new File("src/InputFile");
         Scanner s=  null;
@@ -28,6 +30,7 @@ public class Main {
         HandChecker handCheckee = new HandChecker(fileArray);
         System.out.println(handCheckee.checkFiveOfAKind(0));
         System.out.println(Arrays.toString(fileArray));
+
 
         System.out.println(handCheckee.checkFourOfAKind(0));
         System.out.println(handCheckee.checkFullHouseOfAKind(0));
@@ -73,6 +76,8 @@ public class Main {
         }
 
 
+
+
         String[] fiveOfAKinds = new String[five];
         String[] fourOfAKinds = new String[four];
         String[] fullHouseOfAKinds = new String[full];
@@ -81,6 +86,7 @@ public class Main {
         String[] onePairOfAKinds = new String[onepair];
         String[] highCardOfAKinds = new String[high];
 
+
         five = 0;
         four = 0;
         full = 0;
@@ -88,6 +94,8 @@ public class Main {
         twopair = 0;
         onepair = 0;
         high = 0;
+
+
 
 
         for (int i = 0; i < fileArray.length; i++)
@@ -129,8 +137,6 @@ public class Main {
         }
 
 
-
-
         System.out.println(Arrays.toString(fiveOfAKinds));
         System.out.println(Arrays.toString(fourOfAKinds));
         System.out.println(Arrays.toString(fullHouseOfAKinds));
@@ -139,10 +145,6 @@ public class Main {
         System.out.println(Arrays.toString(onePairOfAKinds));
         System.out.println(Arrays.toString(highCardOfAKinds));
 
-
-
-
-
-
     }
 }
+
