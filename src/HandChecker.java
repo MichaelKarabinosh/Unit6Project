@@ -89,6 +89,10 @@ public class HandChecker {
             if (card.equals("D")) {
                 totalJacks += 1;
             }
+            if (card.equals("Z"))
+            {
+                totalJacks += 1;
+            }
         }
         return totalJacks;
     }

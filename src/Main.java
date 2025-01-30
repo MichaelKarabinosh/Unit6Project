@@ -25,6 +25,7 @@ public class Main {
         String [] fileArray = fileData.split("\n");
         Integer[] bidNums = new Integer[fileArray.length];
         String []faceCardsNotFixed = new String[fileArray.length];
+        String[] jackFileArray = new String[fileArray.length];
         for (int i = 0; i < fileArray.length; i++)
         {
             bidNums[i] = Integer.parseInt(fileArray[i].substring(fileArray[i].indexOf("|") + 1));
@@ -44,8 +45,10 @@ public class Main {
             fileArray[i] = fileArray[i].replace("2", "M");
         }
         System.arraycopy(fileArray, 0, faceCardsNotFixed, 0, fileArray.length);
+        System.arraycopy(fileArray, 0, jackFileArray, 0, fileArray.length);
         Arrays.sort(fileArray);
         HandChecker allCards = new HandChecker(fileArray);
+        HandChecker allCardsJack = new HandChecker(jackFileArray);
         int five = 0;
         int four = 0;
         int full = 0;
@@ -221,7 +224,11 @@ public class Main {
         }
         System.out.println(total);
         total = 0;
-        rank = fileArray.length;
+        for (int i = 0; i < jackFileArray.length; i++)
+        {
+            jackFileArray[i] = jackFileArray[i].replace("D","Z");
+        }
+        rank = jackFileArray.length;
         int fiveJack = 0;
         int fourJack = 0;
         int fullJack = 0;
@@ -229,29 +236,29 @@ public class Main {
         int twoPairJack = 0;
         int onePairJack = 0;
         int highJack = 0;
-        for (int i = 0; i < fileArray.length; i++)
+        for (int i = 0; i < jackFileArray.length; i++)
         {
-            if (allCards.checkFiveOfAKindJackWild(i))
+            if (allCardsJack.checkFiveOfAKindJackWild(i))
             {
                 fiveJack++;
             }
-            else if (allCards.checkFourOfAKindJackWild(i))
+            else if (allCardsJack.checkFourOfAKindJackWild(i))
             {
                 fourJack++;
             }
-            else if (allCards.checkFullHouseOfAKindJackWild(i))
+            else if (allCardsJack.checkFullHouseOfAKindJackWild(i))
             {
                 fullJack++;
             }
-            else if (allCards.checkThreeOfAKindJackWild(i))
+            else if (allCardsJack.checkThreeOfAKindJackWild(i))
             {
                 threeJack++;
             }
-            else if (allCards.checkTwoPairOfAKindJackWild(i))
+            else if (allCardsJack.checkTwoPairOfAKindJackWild(i))
             {
                 twoPairJack++;
             }
-            else if (allCards.checkOnePairOfAKindJackWild(i))
+            else if (allCardsJack.checkOnePairOfAKindJackWild(i))
             {
                 onePairJack++;
             }
@@ -276,40 +283,40 @@ public class Main {
         twoPairJack = 0;
         onePairJack = 0;
         highJack = 0;
-        for (int i = 0; i < fileArray.length; i++)
+        for (int i = 0; i < jackFileArray.length; i++)
         {
             if (allCards.checkFiveOfAKindJackWild(i))
             {
-                fiveOfAKindsJack[fiveJack] = allCards.getLine(i);
+                fiveOfAKindsJack[fiveJack] = allCardsJack.getLine(i);
                 fiveJack++;
             }
             else if (allCards.checkFourOfAKindJackWild(i))
             {
-                fourOfAKindsJack[fourJack] = allCards.getLine(i);
+                fourOfAKindsJack[fourJack] = allCardsJack.getLine(i);
                 fourJack++;
             }
             else if (allCards.checkFullHouseOfAKindJackWild(i))
             {
-                fullHouseOfAKindsJack[fullJack] = allCards.getLine(i);
+                fullHouseOfAKindsJack[fullJack] = allCardsJack.getLine(i);
                 fullJack++;
             }
             else if (allCards.checkThreeOfAKindJackWild(i))
             {
-                threeOfAKindsJack[threeJack] = allCards.getLine(i);
+                threeOfAKindsJack[threeJack] = allCardsJack.getLine(i);
                 threeJack++;
             }
             else if (allCards.checkTwoPairOfAKindJackWild(i))
             {
-                twoPairOfAKindsJack[twoPairJack] = allCards.getLine(i);
+                twoPairOfAKindsJack[twoPairJack] = allCardsJack.getLine(i);
                 twoPairJack++;
             }
             else if (allCards.checkOnePairOfAKindJackWild(i))
             {
-                onePairOfAKindsJack[onePairJack] = allCards.getLine(i);
+                onePairOfAKindsJack[onePairJack] = allCardsJack.getLine(i);
                 onePairJack++;
             }
             else {
-                highCardOfAKindsJack[highJack] = allCards.getLine(i);
+                highCardOfAKindsJack[highJack] = allCardsJack.getLine(i);
                 highJack++;
             }
         }
@@ -390,6 +397,7 @@ public class Main {
             total += bidNums[indexBid] * rank;
             rank--;
         }
+        System.out.println(fiveOfAKindsJack);
         System.out.println("jack part 3:" + total);
     }
 }
