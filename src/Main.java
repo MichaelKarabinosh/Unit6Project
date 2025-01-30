@@ -23,20 +23,19 @@ public class Main {
         }
         String [] fileArray = fileData.split("\n");
         String bigList [] = new String[158];
+        String []faceCardsFixed = new String[bigList.length];
         for (int i = 0; i < fileArray.length; i++)
         {
             fileArray[i] = fileArray[i].substring(0, fileArray[i].indexOf("|"));
+            fileArray[i] = fileArray[i].replace("Ace", "14");
+            fileArray[i] = fileArray[i].replace("King", "13");
+            fileArray[i] = fileArray[i].replace("Queen", "12");
+            fileArray[i] = fileArray[i].replace("Jack", "11");
         }
-        HandChecker handCheckee = new HandChecker(fileArray);
-        System.out.println(handCheckee.checkFiveOfAKind(0));
         System.out.println(Arrays.toString(fileArray));
-
-
-        System.out.println(handCheckee.checkFourOfAKind(0));
-        System.out.println(handCheckee.checkFullHouseOfAKind(0));
-        System.out.println(handCheckee.checkThreeOfAKind(0));
-        System.out.println(handCheckee.checkTwoPairOfAKind(0));
-        System.out.println(handCheckee.checkOnePairOfAKind(0));
+        Arrays.sort(fileArray);
+        System.out.println(Arrays.toString(fileArray));
+        HandChecker handCheckee = new HandChecker(fileArray);
         int five = 0;
         int four = 0;
         int full = 0;
@@ -74,9 +73,6 @@ public class Main {
                 high++;
             }
         }
-
-
-
 
         String[] fiveOfAKinds = new String[five];
         String[] fourOfAKinds = new String[four];
@@ -136,14 +132,6 @@ public class Main {
             }
         }
 
-
-        System.out.println(Arrays.toString(fiveOfAKinds));
-        System.out.println(Arrays.toString(fourOfAKinds));
-        System.out.println(Arrays.toString(fullHouseOfAKinds));
-        System.out.println(Arrays.toString(threeOfAKinds));
-        System.out.println(Arrays.toString(twoPairOfAKinds));
-        System.out.println(Arrays.toString(onePairOfAKinds));
-        System.out.println(Arrays.toString(highCardOfAKinds));
 
     }
 }
