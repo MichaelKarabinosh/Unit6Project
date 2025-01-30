@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -219,6 +220,177 @@ public class Main {
             rank--;
         }
         System.out.println(total);
+        total = 0;
+        rank = fileArray.length;
+        int fiveJack = 0;
+        int fourJack = 0;
+        int fullJack = 0;
+        int threeJack = 0;
+        int twoPairJack = 0;
+        int onePairJack = 0;
+        int highJack = 0;
+        for (int i = 0; i < fileArray.length; i++)
+        {
+            if (allCards.checkFiveOfAKindJackWild(i))
+            {
+                fiveJack++;
+            }
+            else if (allCards.checkFourOfAKindJackWild(i))
+            {
+                fourJack++;
+            }
+            else if (allCards.checkFullHouseOfAKindJackWild(i))
+            {
+                fullJack++;
+            }
+            else if (allCards.checkThreeOfAKindJackWild(i))
+            {
+                threeJack++;
+            }
+            else if (allCards.checkTwoPairOfAKindJackWild(i))
+            {
+                twoPairJack++;
+            }
+            else if (allCards.checkOnePairOfAKindJackWild(i))
+            {
+                onePairJack++;
+            }
+            else {
+                highJack++;
+            }
+        }
+
+        String[] fiveOfAKindsJack = new String[fiveJack];
+        String[] fourOfAKindsJack = new String[fourJack];
+        String[] fullHouseOfAKindsJack = new String[fullJack];
+        String[] threeOfAKindsJack = new String[threeJack];
+        String[] twoPairOfAKindsJack = new String[twoPairJack];
+        String[] onePairOfAKindsJack = new String[onePairJack];
+        String[] highCardOfAKindsJack = new String[highJack];
+
+
+        fiveJack = 0;
+        fourJack = 0;
+        fullJack = 0;
+        threeJack = 0;
+        twoPairJack = 0;
+        onePairJack = 0;
+        highJack = 0;
+        for (int i = 0; i < fileArray.length; i++)
+        {
+            if (allCards.checkFiveOfAKindJackWild(i))
+            {
+                fiveOfAKindsJack[fiveJack] = allCards.getLine(i);
+                fiveJack++;
+            }
+            else if (allCards.checkFourOfAKindJackWild(i))
+            {
+                fourOfAKindsJack[fourJack] = allCards.getLine(i);
+                fourJack++;
+            }
+            else if (allCards.checkFullHouseOfAKindJackWild(i))
+            {
+                fullHouseOfAKindsJack[fullJack] = allCards.getLine(i);
+                fullJack++;
+            }
+            else if (allCards.checkThreeOfAKindJackWild(i))
+            {
+                threeOfAKindsJack[threeJack] = allCards.getLine(i);
+                threeJack++;
+            }
+            else if (allCards.checkTwoPairOfAKindJackWild(i))
+            {
+                twoPairOfAKindsJack[twoPairJack] = allCards.getLine(i);
+                twoPairJack++;
+            }
+            else if (allCards.checkOnePairOfAKindJackWild(i))
+            {
+                onePairOfAKindsJack[onePairJack] = allCards.getLine(i);
+                onePairJack++;
+            }
+            else {
+                highCardOfAKindsJack[highJack] = allCards.getLine(i);
+                highJack++;
+            }
+        }
+
+        for (String fiveOfAKind : fiveOfAKindsJack) {
+            for (int j = 0; j < faceCardsNotFixed.length; j++) {
+                if (faceCardsNotFixed[j].equals(fiveOfAKind)) {
+                    indexBid = j;
+
+                }
+            }
+
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        for (String fourOfAKind : fourOfAKindsJack) {
+            for (int j = 0; j < faceCardsNotFixed.length; j++) {
+                if (faceCardsNotFixed[j].equals(fourOfAKind)) {
+                    indexBid = j;
+
+                }
+            }
+
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        for (String fullHouseOfAKind : fullHouseOfAKindsJack) {
+            for (int j = 0; j < faceCardsNotFixed.length; j++) {
+                if (faceCardsNotFixed[j].equals(fullHouseOfAKind)) {
+                    indexBid = j;
+
+                }
+            }
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        for (String threeOfAKind : threeOfAKindsJack) {
+            for (int j = 0; j < faceCardsNotFixed.length; j++) {
+                if (faceCardsNotFixed[j].equals(threeOfAKind)) {
+                    indexBid = j;
+
+                }
+            }
+
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        for (String twoPairOfAKind : twoPairOfAKindsJack) {
+            for (int j = 0; j < faceCardsNotFixed.length; j++) {
+                if (faceCardsNotFixed[j].equals(twoPairOfAKind)) {
+                    indexBid = j;
+
+                }
+            }
+
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        for (String onePairOfAKind : onePairOfAKindsJack) {
+            for (int j = 0; j < faceCardsNotFixed.length; j++) {
+                if (faceCardsNotFixed[j].equals(onePairOfAKind)) {
+                    indexBid = j;
+
+                }
+            }
+
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        for (String highCardOfAKind : highCardOfAKindsJack) {
+            for (int j = 0; j < faceCardsNotFixed.length; j++) {
+                if (faceCardsNotFixed[j].equals(highCardOfAKind)) {
+                    indexBid = j;
+
+                }
+            }
+
+            total += bidNums[indexBid] * rank;
+            rank--;
+        }
+        System.out.println("jack part 3:" + total);
     }
 }
 
