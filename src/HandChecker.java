@@ -82,6 +82,39 @@ public class HandChecker {
 
     }
 
+    public int checkForJacks(int line){
+        int totalJacks = 0;
+        String[] whatever = list[line].split(",");
+        for (String card : whatever) {
+            if (card.equals("D")) {
+                totalJacks += 1;
+            }
+        }
+        return totalJacks;
+    }
+
+    public boolean checkFiveOfAKindJackWild(int line){
+        return (checkFourOfAKind(line) && checkForJacks(line) == 1) || (checkFourOfAKind(line) && checkForJacks(line) == 4) || (checkFullHouseOfAKind(line) && (checkForJacks(line) == 2) || (checkFullHouseOfAKind(line) && checkForJacks(line) == 3) || checkFiveOfAKind(line));
+    }
+
+    public boolean checkFourOfAKindJackWild(int line){
+        return (checkThreeOfAKind(line) && checkForJacks(line) == 1) || (checkThreeOfAKind(line) && checkForJacks(line) == 3) || (checkTwoPairOfAKind(line) && (checkForJacks(line) == 2) || checkFourOfAKind(line));
+    }
+    public boolean checkFullHouseOfAKindJackWild(int line){
+        return (checkTwoPairOfAKind(line) && checkForJacks(line) == 1) || checkFullHouseOfAKind(line);
+    }
+    public boolean checkThreeOfAKindJackWild(int line){
+        return (checkOnePairOfAKind(line) && checkForJacks(line) == 1) || (checkOnePairOfAKind(line) && checkForJacks(line) == 2) || checkThreeOfAKind(line);
+    }
+    public boolean checkTwoPairOfAKindJackWild(int line){
+        return checkTwoPairOfAKind(line);
+    }
+    public boolean checkOnePairOfAKindJackWild(int line){
+        return checkForJacks(line) == 1 || checkOnePairOfAKind(line);
+    }
+
+
+
     public String getLine(int lineInput) {
         return list[lineInput];
     }
