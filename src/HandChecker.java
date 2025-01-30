@@ -82,6 +82,10 @@ public class HandChecker {
 
     }
 
+    public String getLine(int lineInput) {
+        return list[lineInput];
+    }
+
 
 
 }

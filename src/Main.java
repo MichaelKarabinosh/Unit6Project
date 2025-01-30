@@ -66,19 +66,79 @@ public class Main {
             else if (handCheckee.checkOnePairOfAKind(i))
             {
                 onepair++;
-                System.out.println(fileArray[i]);
             }
             else {
                 high++;
             }
         }
-        System.out.println(five);
-        System.out.println(four);
-        System.out.println(full);
-        System.out.println(three);
-        System.out.println(twopair);
-        System.out.println(onepair);
-        System.out.println(high);
+
+
+        String[] fiveOfAKinds = new String[five];
+        String[] fourOfAKinds = new String[four];
+        String[] fullHouseOfAKinds = new String[full];
+        String[] threeOfAKinds = new String[three];
+        String[] twoPairOfAKinds = new String[twopair];
+        String[] onePairOfAKinds = new String[onepair];
+        String[] highCardOfAKinds = new String[high];
+
+        five = 0;
+        four = 0;
+        full = 0;
+        three = 0;
+        twopair = 0;
+        onepair = 0;
+        high = 0;
+
+
+        for (int i = 0; i < fileArray.length; i++)
+        {
+            if (handCheckee.checkFiveOfAKind(i))
+            {
+                fiveOfAKinds[five] = handCheckee.getLine(i);
+                five++;
+            }
+            else if (handCheckee.checkFourOfAKind(i))
+            {
+                fourOfAKinds[four] = handCheckee.getLine(i);
+                four++;
+            }
+            else if (handCheckee.checkFullHouseOfAKind(i))
+            {
+                fullHouseOfAKinds[full] = handCheckee.getLine(i);
+                full++;
+            }
+            else if (handCheckee.checkThreeOfAKind(i))
+            {
+                threeOfAKinds[three] = handCheckee.getLine(i);
+                three++;
+            }
+            else if (handCheckee.checkTwoPairOfAKind(i))
+            {
+                twoPairOfAKinds[twopair] = handCheckee.getLine(i);
+                twopair++;
+            }
+            else if (handCheckee.checkOnePairOfAKind(i))
+            {
+                onePairOfAKinds[onepair] = handCheckee.getLine(i);
+                onepair++;
+            }
+            else {
+                highCardOfAKinds[high] = handCheckee.getLine(i);
+                high++;
+            }
+        }
+
+
+
+
+        System.out.println(Arrays.toString(fiveOfAKinds));
+        System.out.println(Arrays.toString(fourOfAKinds));
+        System.out.println(Arrays.toString(fullHouseOfAKinds));
+        System.out.println(Arrays.toString(threeOfAKinds));
+        System.out.println(Arrays.toString(twoPairOfAKinds));
+        System.out.println(Arrays.toString(onePairOfAKinds));
+        System.out.println(Arrays.toString(highCardOfAKinds));
+
 
 
 
