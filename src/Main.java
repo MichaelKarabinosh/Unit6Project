@@ -222,13 +222,25 @@ public class Main {
             total += bidNums[indexBid] * rank;
             rank--;
         }
-        System.out.println(total);
+        System.out.println("Number of five of a kind hands: " + five);
+        System.out.println("Number of four of a kind hands: " + four);
+        System.out.println("Number of full house hands: " + full);
+        System.out.println("Number of three of a kind hands: " + three);
+        System.out.println("Number of two pair hands: " + twopair);
+        System.out.println("Number of one pair hands: " + onepair);
+        System.out.println("Number of high card hands: " + high);
+        System.out.println("Total Bid Value: " + total);
         total = 0;
+        for (int i = 0; i <faceCardsNotFixed.length; i++)
+        {
+            faceCardsNotFixed[i] = faceCardsNotFixed[i].replace("D","Z");
+        }
         for (int i = 0; i < jackFileArray.length; i++)
         {
             jackFileArray[i] = jackFileArray[i].replace("D","Z");
         }
         rank = jackFileArray.length;
+        Arrays.sort(jackFileArray);
         int fiveJack = 0;
         int fourJack = 0;
         int fullJack = 0;
@@ -397,8 +409,7 @@ public class Main {
             total += bidNums[indexBid] * rank;
             rank--;
         }
-        System.out.println(fiveOfAKindsJack);
-        System.out.println("jack part 3:" + total);
+        System.out.println("Total Bid Value With Jacks Wild: " + total);
     }
 }
 
