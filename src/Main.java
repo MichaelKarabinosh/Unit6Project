@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -45,7 +44,6 @@ public class Main {
             fileArray[i] = fileArray[i].replace("2", "M");
         }
         System.arraycopy(fileArray, 0, faceCardsNotFixed, 0, fileArray.length);
-        System.arraycopy(fileArray, 0, jackFileArray, 0, fileArray.length);
         Arrays.sort(fileArray);
         HandChecker allCards = new HandChecker(fileArray);
         HandChecker allCardsJack = new HandChecker(jackFileArray);
@@ -53,8 +51,8 @@ public class Main {
         int four = 0;
         int full = 0;
         int three = 0;
-        int twopair = 0;
-        int onepair = 0;
+        int twoPair = 0;
+        int onePair = 0;
         int high = 0;
         for (int i = 0; i < fileArray.length; i++)
         {
@@ -76,11 +74,11 @@ public class Main {
             }
             else if (allCards.checkTwoPairOfAKind(i))
             {
-                twopair++;
+                twoPair++;
             }
             else if (allCards.checkOnePairOfAKind(i))
             {
-                onepair++;
+                onePair++;
             }
             else {
                 high++;
@@ -91,16 +89,16 @@ public class Main {
         String[] fourOfAKinds = new String[four];
         String[] fullHouseOfAKinds = new String[full];
         String[] threeOfAKinds = new String[three];
-        String[] twoPairOfAKinds = new String[twopair];
-        String[] onePairOfAKinds = new String[onepair];
+        String[] twoPairOfAKinds = new String[twoPair];
+        String[] onePairOfAKinds = new String[onePair];
         String[] highCardOfAKinds = new String[high];
 
         five = 0;
         four = 0;
         full = 0;
         three = 0;
-        twopair = 0;
-        onepair = 0;
+        twoPair = 0;
+        onePair = 0;
         high = 0;
 
 
@@ -130,13 +128,13 @@ public class Main {
             }
             else if (allCards.checkTwoPairOfAKind(i))
             {
-                twoPairOfAKinds[twopair] = allCards.getLine(i);
-                twopair++;
+                twoPairOfAKinds[twoPair] = allCards.getLine(i);
+                twoPair++;
             }
             else if (allCards.checkOnePairOfAKind(i))
             {
-                onePairOfAKinds[onepair] = allCards.getLine(i);
-                onepair++;
+                onePairOfAKinds[onePair] = allCards.getLine(i);
+                onePair++;
             }
             else {
                 highCardOfAKinds[high] = allCards.getLine(i);
@@ -226,17 +224,15 @@ public class Main {
         System.out.println("Number of four of a kind hands: " + four);
         System.out.println("Number of full house hands: " + full);
         System.out.println("Number of three of a kind hands: " + three);
-        System.out.println("Number of two pair hands: " + twopair);
-        System.out.println("Number of one pair hands: " + onepair);
+        System.out.println("Number of two pair hands: " + twoPair);
+        System.out.println("Number of one pair hands: " + onePair);
         System.out.println("Number of high card hands: " + high);
         System.out.println("Total Bid Value: " + total);
         total = 0;
+        System.arraycopy(fileArray, 0, jackFileArray, 0, fileArray.length);
         for (int i = 0; i <faceCardsNotFixed.length; i++)
         {
             faceCardsNotFixed[i] = faceCardsNotFixed[i].replace("D","Z");
-        }
-        for (int i = 0; i < jackFileArray.length; i++)
-        {
             jackFileArray[i] = jackFileArray[i].replace("D","Z");
         }
         rank = jackFileArray.length;
