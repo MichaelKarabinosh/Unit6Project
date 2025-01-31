@@ -41,7 +41,7 @@ public class Main {
         }
         System.arraycopy(fileArray, 0, faceCardsNotFixed, 0, fileArray.length);
         HandChecker allCards = new HandChecker(fileArray);
-        boolean jacks = false;
+        boolean jackson = false;
         int five = 0;
         int four = 0;
         int full = 0;
@@ -50,7 +50,7 @@ public class Main {
         int onePair = 0;
         int high = 0;
         for (int l = 0; l < 2; l++) {
-            if (jacks) {
+            if (jackson) {
                 for (int i = 0; i < faceCardsNotFixed.length; i++) {
                     faceCardsNotFixed[i] = faceCardsNotFixed[i].replace("D", "Z");
                     fileArray[i] = fileArray[i].replace("D", "Z");
@@ -58,7 +58,7 @@ public class Main {
             }
             Arrays.sort(fileArray);
             for (int i = 0; i < fileArray.length; i++) {
-                if (!jacks) {
+                if (!jackson) {
                     if (allCards.checkFiveOfAKind(i)) {
                         five++;
                     } else if (allCards.checkFourOfAKind(i)) {
@@ -110,7 +110,7 @@ public class Main {
 
 
             for (int i = 0; i < fileArray.length; i++) {
-                if (!jacks) {
+                if (!jackson) {
                     if (allCards.checkFiveOfAKind(i)) {
                         fiveOfAKinds[five] = allCards.getLine(i);
                         five++;
@@ -236,7 +236,7 @@ public class Main {
                 total += bidNums[indexBid] * rank;
                 rank--;
             }
-            if (!jacks) {
+            if (!jackson) {
                 System.out.println("Number of five of a kind hands: " + five);
                 System.out.println("Number of full house hands: " + full);
                 System.out.println("Number of four of a kind hands: " + four);
@@ -246,7 +246,7 @@ public class Main {
                 System.out.println("Number of high card hands: " + high);
                 System.out.println("Total Bid Value: " + total);
             }
-            if (jacks) {
+            if (jackson) {
                 System.out.println("Total Bid Value With Jacks Wild: " + total);
             }
             five = 0;
@@ -256,7 +256,7 @@ public class Main {
             twoPair = 0;
             onePair = 0;
             high = 0;
-            jacks = true;
+            jackson = true;
         }
     }
 }
