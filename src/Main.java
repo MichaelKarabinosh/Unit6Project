@@ -238,8 +238,8 @@ public class Main {
             }
             if (!jacks) {
                 System.out.println("Number of five of a kind hands: " + five);
-                System.out.println("Number of four of a kind hands: " + four);
                 System.out.println("Number of full house hands: " + full);
+                System.out.println("Number of four of a kind hands: " + four);
                 System.out.println("Number of three of a kind hands: " + three);
                 System.out.println("Number of two pair hands: " + twoPair);
                 System.out.println("Number of one pair hands: " + onePair);
