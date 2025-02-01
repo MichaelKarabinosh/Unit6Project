@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 
 public class Main {
+
     public static void main(String[] args) {
 
 
@@ -42,220 +43,44 @@ public class Main {
         System.arraycopy(fileArray, 0, faceCardsNotFixed, 0, fileArray.length);
         HandChecker allCards = new HandChecker(fileArray);
         boolean jackson = false;
-        int five = 0;
-        int four = 0;
-        int full = 0;
-        int three = 0;
-        int twoPair = 0;
-        int onePair = 0;
-        int high = 0;
         for (int l = 0; l < 2; l++) {
             if (jackson) {
                 for (int i = 0; i < faceCardsNotFixed.length; i++) {
                     faceCardsNotFixed[i] = faceCardsNotFixed[i].replace("D", "Z");
-                    fileArray[i] = fileArray[i].replace("D", "Z");
                 }
             }
             Arrays.sort(fileArray);
-            for (int i = 0; i < fileArray.length; i++) {
-                if (!jackson) {
-                    if (allCards.checkFiveOfAKind(i)) {
-                        five++;
-                    } else if (allCards.checkFourOfAKind(i)) {
-                        four++;
-                    } else if (allCards.checkFullHouseOfAKind(i)) {
-                        full++;
-                    } else if (allCards.checkThreeOfAKind(i)) {
-                        three++;
-                    } else if (allCards.checkTwoPairOfAKind(i)) {
-                        twoPair++;
-                    } else if (allCards.checkOnePairOfAKind(i)) {
-                        onePair++;
-                    } else {
-                        high++;
-                    }
-                } else {
-                    if (allCards.checkFiveOfAKindJackWild(i)) {
-                        five++;
-                    } else if (allCards.checkFourOfAKindJackWild(i)) {
-                        four++;
-                    } else if (allCards.checkFullHouseOfAKindJackWild(i)) {
-                        full++;
-                    } else if (allCards.checkThreeOfAKindJackWild(i)) {
-                        three++;
-                    } else if (allCards.checkTwoPairOfAKindJackWild(i)) {
-                        twoPair++;
-                    } else if (allCards.checkOnePairOfAKindJackWild(i)) {
-                        onePair++;
-                    } else {
-                        high++;
-                    }
-                }
-            }
-            String[] fiveOfAKinds = new String[five];
-            String[] fourOfAKinds = new String[four];
-            String[] fullHouseOfAKinds = new String[full];
-            String[] threeOfAKinds = new String[three];
-            String[] twoPairOfAKinds = new String[twoPair];
-            String[] onePairOfAKinds = new String[onePair];
-            String[] highCardOfAKinds = new String[high];
+            int [] numsOfHands = allCards.calculateNumsOfAllHands(jackson);
+            String[] fiveOfAKinds = allCards.cleanFiveOfAKindArray();
+            String[] fourOfAKinds = allCards.cleanFourOfAKindArray();
+            String[] fullHouseOfAKinds = allCards.cleanFullHouseArray();
+            String[] threeOfAKinds = allCards.cleanThreeOfAKind();
+            String[] twoPairOfAKinds = allCards.cleanTwoPairArray();
+            String[] onePairOfAKinds = allCards.cleanOnePairArray();
+            String[] highCardOfAKinds = allCards.cleanHighCardArray();
 
-            five = 0;
-            four = 0;
-            full = 0;
-            three = 0;
-            twoPair = 0;
-            onePair = 0;
-            high = 0;
-
-
-            for (int i = 0; i < fileArray.length; i++) {
-                if (!jackson) {
-                    if (allCards.checkFiveOfAKind(i)) {
-                        fiveOfAKinds[five] = allCards.getLine(i);
-                        five++;
-                    } else if (allCards.checkFourOfAKind(i)) {
-                        fourOfAKinds[four] = allCards.getLine(i);
-                        four++;
-                    } else if (allCards.checkFullHouseOfAKind(i)) {
-                        fullHouseOfAKinds[full] = allCards.getLine(i);
-                        full++;
-                    } else if (allCards.checkThreeOfAKind(i)) {
-                        threeOfAKinds[three] = allCards.getLine(i);
-                        three++;
-                    } else if (allCards.checkTwoPairOfAKind(i)) {
-                        twoPairOfAKinds[twoPair] = allCards.getLine(i);
-                        twoPair++;
-                    } else if (allCards.checkOnePairOfAKind(i)) {
-                        onePairOfAKinds[onePair] = allCards.getLine(i);
-                        onePair++;
-                    } else {
-                        highCardOfAKinds[high] = allCards.getLine(i);
-                        high++;
-                    }
-                } else {
-                    if (allCards.checkFiveOfAKindJackWild(i)) {
-                        fiveOfAKinds[five] = allCards.getLine(i);
-                        five++;
-                    } else if (allCards.checkFourOfAKindJackWild(i)) {
-                        fourOfAKinds[four] = allCards.getLine(i);
-                        four++;
-                    } else if (allCards.checkFullHouseOfAKindJackWild(i)) {
-                        fullHouseOfAKinds[full] = allCards.getLine(i);
-                        full++;
-                    } else if (allCards.checkThreeOfAKindJackWild(i)) {
-                        threeOfAKinds[three] = allCards.getLine(i);
-                        three++;
-                    } else if (allCards.checkTwoPairOfAKindJackWild(i)) {
-                        twoPairOfAKinds[twoPair] = allCards.getLine(i);
-                        twoPair++;
-                    } else if (allCards.checkOnePairOfAKindJackWild(i)) {
-                        onePairOfAKinds[onePair] = allCards.getLine(i);
-                        onePair++;
-                    } else {
-                        highCardOfAKinds[high] = allCards.getLine(i);
-                        high++;
-                    }
-                }
-            }
-            int rank = fileArray.length;
-            int indexBid = 0;
             int total = 0;
-            for (String fiveOfAKind : fiveOfAKinds) {
-                for (int j = 0; j < faceCardsNotFixed.length; j++) {
-                    if (faceCardsNotFixed[j].equals(fiveOfAKind)) {
-                        indexBid = j;
-                    }
-                }
-
-                total += bidNums[indexBid] * rank;
-                rank--;
-            }
-            for (String fourOfAKind : fourOfAKinds) {
-                for (int j = 0; j < faceCardsNotFixed.length; j++) {
-                    if (faceCardsNotFixed[j].equals(fourOfAKind)) {
-                        indexBid = j;
-
-                    }
-                }
-
-                total += bidNums[indexBid] * rank;
-                rank--;
-            }
-            for (String fullHouseOfAKind : fullHouseOfAKinds) {
-                for (int j = 0; j < faceCardsNotFixed.length; j++) {
-                    if (faceCardsNotFixed[j].equals(fullHouseOfAKind)) {
-                        indexBid = j;
-
-                    }
-                }
-                total += bidNums[indexBid] * rank;
-                rank--;
-            }
-            for (String threeOfAKind : threeOfAKinds) {
-                for (int j = 0; j < faceCardsNotFixed.length; j++) {
-                    if (faceCardsNotFixed[j].equals(threeOfAKind)) {
-                        indexBid = j;
-
-                    }
-                }
-
-                total += bidNums[indexBid] * rank;
-                rank--;
-            }
-            for (String twoPairOfAKind : twoPairOfAKinds) {
-                for (int j = 0; j < faceCardsNotFixed.length; j++) {
-                    if (faceCardsNotFixed[j].equals(twoPairOfAKind)) {
-                        indexBid = j;
-
-                    }
-                }
-
-                total += bidNums[indexBid] * rank;
-                rank--;
-            }
-            for (String onePairOfAKind : onePairOfAKinds) {
-                for (int j = 0; j < faceCardsNotFixed.length; j++) {
-                    if (faceCardsNotFixed[j].equals(onePairOfAKind)) {
-                        indexBid = j;
-
-                    }
-                }
-
-                total += bidNums[indexBid] * rank;
-                rank--;
-            }
-            for (String highCardOfAKind : highCardOfAKinds) {
-                for (int j = 0; j < faceCardsNotFixed.length; j++) {
-                    if (faceCardsNotFixed[j].equals(highCardOfAKind)) {
-                        indexBid = j;
-
-                    }
-                }
-
-                total += bidNums[indexBid] * rank;
-                rank--;
-            }
+            total += allCards.getIndexofBid(fiveOfAKinds, faceCardsNotFixed, bidNums);
+            total += allCards.getIndexofBid(fourOfAKinds, faceCardsNotFixed, bidNums);
+            total += allCards.getIndexofBid(fullHouseOfAKinds, faceCardsNotFixed, bidNums);
+            total += allCards.getIndexofBid(threeOfAKinds, faceCardsNotFixed, bidNums);
+            total += allCards.getIndexofBid(twoPairOfAKinds, faceCardsNotFixed, bidNums);
+            total += allCards.getIndexofBid(onePairOfAKinds, faceCardsNotFixed, bidNums);
+            total += allCards.getIndexofBid(highCardOfAKinds, faceCardsNotFixed, bidNums);
             if (!jackson) {
-                System.out.println("Number of five of a kind hands: " + five);
-                System.out.println("Number of full house hands: " + full);
-                System.out.println("Number of four of a kind hands: " + four);
-                System.out.println("Number of three of a kind hands: " + three);
-                System.out.println("Number of two pair hands: " + twoPair);
-                System.out.println("Number of one pair hands: " + onePair);
-                System.out.println("Number of high card hands: " + high);
+                System.out.println("Number of five of a kind hands: " + numsOfHands[0]);
+                System.out.println("Number of full house hands: " + numsOfHands[2]);
+                System.out.println("Number of four of a kind hands: " + numsOfHands[1]);
+                System.out.println("Number of three of a kind hands: " + numsOfHands[3]);
+                System.out.println("Number of two pair hands: " + numsOfHands[4]);
+                System.out.println("Number of one pair hands: " + numsOfHands[5]);
+                System.out.println("Number of high card hands: " + numsOfHands[6]);
                 System.out.println("Total Bid Value: " + total);
+                allCards.resetRank();
             }
             if (jackson) {
                 System.out.println("Total Bid Value With Jacks Wild: " + total);
             }
-            five = 0;
-            four = 0;
-            full = 0;
-            three = 0;
-            twoPair = 0;
-            onePair = 0;
-            high = 0;
             jackson = true;
         }
     }
