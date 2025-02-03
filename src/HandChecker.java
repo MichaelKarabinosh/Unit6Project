@@ -12,6 +12,8 @@ public class HandChecker {
     private String[] twoPairOfAKinds;
     private String[] onePairOfAKinds;
     private String[] highCardOfAKinds;
+    private Integer [] bidNums;
+   private  String [] faceCardsNotFixed;
 
     public HandChecker(String[] list){
         this.list = list;
@@ -23,6 +25,26 @@ public class HandChecker {
         twoPairOfAKinds = new String[list.length];
         onePairOfAKinds = new String[list.length];
         highCardOfAKinds = new String[list.length];
+         bidNums = new Integer[list.length];
+        faceCardsNotFixed = new String[list.length];
+        for (int i = 0; i < list.length; i++) {
+            bidNums[i] = Integer.parseInt(list[i].substring(list[i].indexOf("|") + 1));
+            list[i] = list[i].substring(0, list[i].indexOf("|"));
+            list[i] = list[i].replace("Ace", "A");
+            list[i] = list[i].replace("King", "B");
+            list[i] = list[i].replace("Queen", "C");
+            list[i] = list[i].replace("Jack", "D");
+            list[i] = list[i].replace("10", "E");
+            list[i] = list[i].replace("9", "F");
+            list[i] = list[i].replace("8", "G");
+            list[i] = list[i].replace("7", "H");
+            list[i] = list[i].replace("6", "I");
+            list[i] = list[i].replace("5", "J");
+            list[i] = list[i].replace("4", "K");
+            list[i] = list[i].replace("3", "L");
+            list[i] = list[i].replace("2", "M");
+        }
+        System.arraycopy(list, 0, faceCardsNotFixed, 0, faceCardsNotFixed.length);
     }
 
 
@@ -119,13 +141,9 @@ public class HandChecker {
     }
 
 
-
-    public String getLine(int lineInput) {
-        return list[lineInput];
-    }
-
-    public int getIndexofBid(String [] typeOfHand, String [] faceCardsNotFixed, Integer[] bidNums)
+    public int getIndexofBid(String [] typeOfHand)
     {
+
         int total = 0;
         int indexBid = 0;
         for (String singleHand : typeOfHand) {
@@ -153,8 +171,6 @@ public class HandChecker {
         int twoPair = 0;
         int onePair =  0;
         int high =  0;
-        if (jackson)
-        {
             Arrays.fill(fiveOfAKinds,null);
             Arrays.fill(fourOfAKinds,null);
             Arrays.fill(fullHouseOfAKinds,null);
@@ -162,7 +178,7 @@ public class HandChecker {
             Arrays.fill(twoPairOfAKinds,null);
             Arrays.fill(onePairOfAKinds,null);
             Arrays.fill(highCardOfAKinds,null);
-        }
+            Arrays.sort(list);
         for (int i = 0; i < list.length; i++) {
             if (!jackson) {
                 if (checkFiveOfAKind(i)) {
@@ -190,6 +206,7 @@ public class HandChecker {
             } else {
                 for (int j = 0; j < list.length; j++) {
                     list[j] = list[j].replace("D", "Z");
+                    faceCardsNotFixed[i] = faceCardsNotFixed[i].replace("D", "Z");
                     Arrays.sort(list);
                 }
                 if (checkFiveOfAKindJackWild(i)) {
