@@ -180,58 +180,36 @@ public class HandChecker {
             Arrays.fill(highCardOfAKinds,null);
             Arrays.sort(list);
         for (int i = 0; i < list.length; i++) {
-            if (!jackson) {
-                if (checkFiveOfAKind(i)) {
-                    five++;
-                    fiveOfAKinds[i] = list[i];
-                } else if (checkFourOfAKind(i)) {
-                    four++;
-                    fourOfAKinds[i] = list[i];
-                } else if (checkFullHouseOfAKind(i)) {
-                    full++;
-                    fullHouseOfAKinds[i] = list[i];
-                } else if (checkThreeOfAKind(i)) {
-                    three++;
-                    threeOfAKinds[i] = list[i];
-                } else if (checkTwoPairOfAKind(i)) {
-                    twoPair++;
-                    twoPairOfAKinds[i] = list[i];
-                } else if (checkOnePairOfAKind(i)) {
-                    onePair++;
-                    onePairOfAKinds[i] = list[i];
-                } else {
-                    high++;
-                    highCardOfAKinds[i] = list[i];
-                }
-            } else {
+            if (jackson) {
                 for (int j = 0; j < list.length; j++) {
                     list[j] = list[j].replace("D", "Z");
                     faceCardsNotFixed[i] = faceCardsNotFixed[i].replace("D", "Z");
                     Arrays.sort(list);
                 }
-                if (checkFiveOfAKindJackWild(i)) {
-                    five++;
-                    fiveOfAKinds[i] = list[i];
-                } else if (checkFourOfAKindJackWild(i)) {
-                    four++;
-                    fourOfAKinds[i] = list[i];
-                } else if (checkFullHouseOfAKindJackWild(i)) {
-                    full++;
-                    fullHouseOfAKinds[i] = list[i];
-                } else if (checkThreeOfAKindJackWild(i)) {
-                    three++;
-                    threeOfAKinds[i] = list[i];
-                } else if (checkTwoPairOfAKindJackWild(i)) {
-                    twoPair++;
-                    twoPairOfAKinds[i] = list[i];
-                } else if (checkOnePairOfAKindJackWild(i)) {
-                    onePair++;
-                    onePairOfAKinds[i] = list[i];
-                } else {
-                    high++;
-                    highCardOfAKinds[i] = list[i];
-                }
             }
+            if (checkFiveOfAKindJackWild(i)) {
+                five++;
+                fiveOfAKinds[i] = list[i];
+            } else if (checkFourOfAKindJackWild(i)) {
+                four++;
+                fourOfAKinds[i] = list[i];
+            } else if (checkFullHouseOfAKindJackWild(i)) {
+                full++;
+                fullHouseOfAKinds[i] = list[i];
+            } else if (checkThreeOfAKindJackWild(i)) {
+                three++;
+                threeOfAKinds[i] = list[i];
+            } else if (checkTwoPairOfAKindJackWild(i)) {
+                twoPair++;
+                twoPairOfAKinds[i] = list[i];
+            } else if (checkOnePairOfAKindJackWild(i)) {
+                onePair++;
+                onePairOfAKinds[i] = list[i];
+            } else {
+                high++;
+                highCardOfAKinds[i] = list[i];
+            }
+
         }
         return new int[]{five, four, full, three, twoPair, onePair, high};
     }
