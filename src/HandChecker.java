@@ -49,59 +49,58 @@ public class HandChecker {
 
 
 
-    public boolean checkFiveOfAKind(int line){
+    public boolean checkFiveOfAKind(int line, boolean jackson){
         String[] singleHand = list[line].split(",");
-        return singleHand[0].equals(singleHand[1]) && singleHand[1].equals(singleHand[2]) && singleHand[2].equals(singleHand[3]) && singleHand[3].equals(singleHand[4]);
+        if (!jackson)
+            return singleHand[0].equals(singleHand[1]) && singleHand[1].equals(singleHand[2]) && singleHand[2].equals(singleHand[3]) && singleHand[3].equals(singleHand[4]);
+        else
+            return (checkFourOfAKind(line,false) && checkForJacks(line) == 1) || (checkFourOfAKind(line,false) && checkForJacks(line) == 4) || (checkFullHouseOfAKind(line,false) && (checkForJacks(line) == 2) || (checkFullHouseOfAKind(line,false) && checkForJacks(line) == 3) || checkFiveOfAKind(line,false));
         }
 
-        public boolean checkFourOfAKind(int line){
+        public boolean checkFourOfAKind(int line, boolean jackson){
             String[] singleHand = list[line].split(",");
             Arrays.sort(singleHand);
-            if (singleHand[0].equals(singleHand[1]) && singleHand[1].equals(singleHand[1+1]) && singleHand[1+1].equals(singleHand[1+1+1]))
-                return true;
-            return singleHand[1].equals(singleHand[1 + 1]) && singleHand[1 + 1].equals(singleHand[1 + 1 + 1]) && singleHand[1 + 1 + 1].equals(singleHand[1 + 1 + 1 + 1]);
+            if(!jackson)
+                return singleHand[0].equals(singleHand[1]) && singleHand[1].equals(singleHand[1+1]) && singleHand[1+1].equals(singleHand[1+1+1]) || singleHand[1].equals(singleHand[1 + 1]) && singleHand[1 + 1].equals(singleHand[1 + 1 + 1]) && singleHand[1 + 1 + 1].equals(singleHand[1 + 1 + 1 + 1]);
+            else
+                return (checkThreeOfAKind(line, false) && checkForJacks(line) == 1) || (checkThreeOfAKind(line, false) && checkForJacks(line) == 3) || (checkTwoPairOfAKind(line) && (checkForJacks(line) == 2) || checkFourOfAKind(line, false));
+
 
         }
 
-    public boolean checkFullHouseOfAKind(int line){
+    public boolean checkFullHouseOfAKind(int line, boolean jackson){
         String[] singleHand = list[line].split(",");
         Arrays.sort(singleHand);
 
-        if (singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[2+1]) && singleHand[1+1].equals(singleHand[1+1+1+1]))
-            return true;
-        return singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[1]) && singleHand[3].equals(singleHand[1 + 1 + 1 + 1]);
+        if (!jackson)
+            return singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[2+1]) && singleHand[1+1].equals(singleHand[1+1+1+1]) || singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[1]) && singleHand[3].equals(singleHand[1 + 1 + 1 + 1]);
+        else
+            return (checkTwoPairOfAKind(line) && checkForJacks(line) == 1) || checkFullHouseOfAKind(line, false);
 
     }
 
-    public boolean checkThreeOfAKind(int line){
+    public boolean checkThreeOfAKind(int line, boolean jackson){
         String[] singleHand = list[line].split(",");
         Arrays.sort(singleHand);
 
-        if (singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[0]))
-            return true;
-        if (singleHand[1].equals(singleHand[2]) && singleHand[1].equals(singleHand[3]))
-        {
-            return true;
-        }
-        return singleHand[2].equals(singleHand[3]) && singleHand[2].equals(singleHand[4]);
-
+        if (!jackson)
+            return (singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[0])) || (singleHand[1].equals(singleHand[2]) && singleHand[1].equals(singleHand[3])) || singleHand[2].equals(singleHand[3]) && singleHand[2].equals(singleHand[4]);
+        else
+            return (checkOnePairOfAKind(line, false) && checkForJacks(line) == 1) || (checkOnePairOfAKind(line, false) && checkForJacks(line) == 2) || checkThreeOfAKind(line, false);
     }
 
     public boolean checkTwoPairOfAKind(int line){
         String[] singleHand = list[line].split(",");
         Arrays.sort(singleHand);
-
-        if (singleHand[0].equals(singleHand[1]) && singleHand[3].equals(singleHand[4]))
-            return true;
-        if (singleHand[1].equals(singleHand[2]) && singleHand[3].equals(singleHand[4]))
-            return true;
-        return singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[3]);
-
+        return (singleHand[0].equals(singleHand[1]) && singleHand[3].equals(singleHand[4])) || (singleHand[1].equals(singleHand[2]) && singleHand[3].equals(singleHand[4])) || singleHand[0].equals(singleHand[1]) && singleHand[2].equals(singleHand[3]);
     }
-    public boolean checkOnePairOfAKind(int line){
+    public boolean checkOnePairOfAKind(int line, boolean jackson){
         String[] singleHand = list[line].split(",");
         Arrays.sort(singleHand);
-        return singleHand[0].equals(singleHand[1]) || singleHand[1].equals(singleHand[2]) || singleHand[2].equals(singleHand[3]) || singleHand[3].equals(singleHand[4]);
+        if (!jackson)
+            return singleHand[0].equals(singleHand[1]) || singleHand[1].equals(singleHand[2]) || singleHand[2].equals(singleHand[3]) || singleHand[3].equals(singleHand[4]);
+        else
+            return checkForJacks(line) == 1 || checkOnePairOfAKind(line, false);
 
     }
 
@@ -118,26 +117,6 @@ public class HandChecker {
             }
         }
         return totalJacks;
-    }
-
-    public boolean checkFiveOfAKindJackWild(int line){
-        return (checkFourOfAKind(line) && checkForJacks(line) == 1) || (checkFourOfAKind(line) && checkForJacks(line) == 4) || (checkFullHouseOfAKind(line) && (checkForJacks(line) == 2) || (checkFullHouseOfAKind(line) && checkForJacks(line) == 3) || checkFiveOfAKind(line));
-    }
-
-    public boolean checkFourOfAKindJackWild(int line){
-        return (checkThreeOfAKind(line) && checkForJacks(line) == 1) || (checkThreeOfAKind(line) && checkForJacks(line) == 3) || (checkTwoPairOfAKind(line) && (checkForJacks(line) == 2) || checkFourOfAKind(line));
-    }
-    public boolean checkFullHouseOfAKindJackWild(int line){
-        return (checkTwoPairOfAKind(line) && checkForJacks(line) == 1) || checkFullHouseOfAKind(line);
-    }
-    public boolean checkThreeOfAKindJackWild(int line){
-        return (checkOnePairOfAKind(line) && checkForJacks(line) == 1) || (checkOnePairOfAKind(line) && checkForJacks(line) == 2) || checkThreeOfAKind(line);
-    }
-    public boolean checkTwoPairOfAKindJackWild(int line){
-        return checkTwoPairOfAKind(line);
-    }
-    public boolean checkOnePairOfAKindJackWild(int line){
-        return checkForJacks(line) == 1 || checkOnePairOfAKind(line);
     }
 
 
@@ -187,22 +166,22 @@ public class HandChecker {
                     Arrays.sort(list);
                 }
             }
-            if (checkFiveOfAKindJackWild(i)) {
+            if (checkFiveOfAKind(i,jackson)) {
                 five++;
                 fiveOfAKinds[i] = list[i];
-            } else if (checkFourOfAKindJackWild(i)) {
+            } else if (checkFourOfAKind(i,jackson)) {
                 four++;
                 fourOfAKinds[i] = list[i];
-            } else if (checkFullHouseOfAKindJackWild(i)) {
+            } else if (checkFullHouseOfAKind(i,jackson)) {
                 full++;
                 fullHouseOfAKinds[i] = list[i];
-            } else if (checkThreeOfAKindJackWild(i)) {
+            } else if (checkThreeOfAKind(i,jackson)) {
                 three++;
                 threeOfAKinds[i] = list[i];
-            } else if (checkTwoPairOfAKindJackWild(i)) {
+            } else if (checkTwoPairOfAKind(i)) {
                 twoPair++;
                 twoPairOfAKinds[i] = list[i];
-            } else if (checkOnePairOfAKindJackWild(i)) {
+            } else if (checkOnePairOfAKind(i,jackson)) {
                 onePair++;
                 onePairOfAKinds[i] = list[i];
             } else {
